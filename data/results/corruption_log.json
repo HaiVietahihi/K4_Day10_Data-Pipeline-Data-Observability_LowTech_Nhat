@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-08-06T09:34:35.462068+00:00",
+  "reference_date": "2026-08-06",
+  "source_rows": 24,
+  "corrupted_rows": 24,
+  "row_delta": 0,
+  "unique_paper_ids": 22,
+  "targeting": {
+    "strategy": "baseline_retrieval_hits",
+    "test_set_path": "/Users/nguyenhoangminh/K4_Day10_Data-Pipeline-Data-Observability_LowTech_Nhat/data/eval/test_set.json",
+    "baseline_answers_path": "/Users/nguyenhoangminh/K4_Day10_Data-Pipeline-Data-Observability_LowTech_Nhat/data/results/baseline_answers.json",
+    "retrievable_at_baseline": [
+      "10.21203/rs.3.rs-10178277/v1",
+      "10.2196/preprints.106157",
+      "10.21079/11681/50309",
+      "10.63646/kpqm1958",
+      "10.52060/juptik.v4i1.4318",
+      "10.54254/2753-8818/2026.dl34055"
+    ],
+    "dropped": [
+      "10.21203/rs.3.rs-10178277/v1",
+      "10.2196/preprints.106157"
+    ],
+    "degraded": [
+      "10.21079/11681/50309",
+      "10.63646/kpqm1958"
+    ],
+    "control_left_untouched": [
+      "10.52060/juptik.v4i1.4318",
+      "10.54254/2753-8818/2026.dl34055"
+    ]
+  },
+  "evaluation_set": {
+    "doc_ids": [
+      "10.2118/234689-pa",
+      "10.1007/s10278-026-02086-9",
+      "10.21203/rs.3.rs-10178277/v1",
+      "10.2196/preprints.106157",
+      "10.3390/buildings16132637",
+      "10.21079/11681/50309",
+      "10.1111/exsy.70341",
+      "10.63646/kpqm1958",
+      "10.52060/juptik.v4i1.4318",
+      "10.54254/2753-8818/2026.dl34055"
+    ],
+    "touched_by_corruption": [
+      "10.1007/s10278-026-02086-9",
+      "10.1111/exsy.70341",
+      "10.21079/11681/50309",
+      "10.2118/234689-pa",
+      "10.21203/rs.3.rs-10178277/v1",
+      "10.2196/preprints.106157",
+      "10.3390/buildings16132637",
+      "10.63646/kpqm1958"
+    ],
+    "untouched": [
+      "10.52060/juptik.v4i1.4318",
+      "10.54254/2753-8818/2026.dl34055"
+    ]
+  },
+  "scenarios": [
+    {
+      "scenario": "drop_records",
+      "description": "Delete retrievable records to simulate an ingestion window that silently lost data.",
+      "parameters": {
+        "count": 2
+      },
+      "affected_paper_ids": [
+        "10.21203/rs.3.rs-10178277/v1",
+        "10.2196/preprints.106157"
+      ],
+      "affected_rows": 2,
+      "evaluation_overlap": [
+        "10.21203/rs.3.rs-10178277/v1",
+        "10.2196/preprints.106157"
+      ],
+      "expected_quality_signal": "row count drops and the ground-truth documents become unretrievable"
+    },
+    {
+      "scenario": "blank_summary",
+      "description": "Replace the abstract with an empty string to simulate a failed field mapping upstream.",
+      "parameters": {
+        "count": 2
+      },
+      "affected_paper_ids": [
+        "10.21079/11681/50309",
+        "10.63646/kpqm1958"
+      ],
+      "affected_rows": 2,
+      "evaluation_overlap": [
+        "10.21079/11681/50309",
+        "10.63646/kpqm1958"
+      ],
+      "expected_quality_signal": "summary length check fails and the embedding loses its main semantic content"
+    },
+    {
+      "scenario": "truncate_title",
+      "description": "Cut titles to a fixed prefix to simulate a column width limit in an upstream store.",
+      "parameters": {
+        "count": 2,
+        "max_chars": 18
+      },
+      "affected_paper_ids": [
+        "10.21079/11681/50309",
+        "10.63646/kpqm1958"
+      ],
+      "affected_rows": 2,
+      "evaluation_overlap": [
+        "10.21079/11681/50309",
+        "10.63646/kpqm1958"
+      ],
+      "expected_quality_signal": "exact title lookup breaks and the title contributes far less to the embedding"
+    },
+    {
+      "scenario": "stale_publication_date",
+      "description": "Rewrite the publication date to 2000-01-01 to simulate a broken date parser.",
+      "parameters": {
+        "count": 3,
+        "published": "2000-01-01"
+      },
+      "affected_paper_ids": [
+        "10.2118/234689-pa",
+        "10.1007/s10278-026-02086-9",
+        "10.3390/buildings16132637"
+      ],
+      "affected_rows": 3,
+      "evaluation_overlap": [
+        "10.2118/234689-pa",
+        "10.1007/s10278-026-02086-9",
+        "10.3390/buildings16132637"
+      ],
+      "expected_quality_signal": "freshness flips to stale because age_days jumps far past the threshold"
+    },
+    {
+      "scenario": "inject_noise",
+      "description": "Append unrelated boilerplate to text_for_embedding to simulate template or footer leakage.",
+      "parameters": {
+        "count": 2,
+        "noise_chars": 208
+      },
+      "affected_paper_ids": [
+        "10.21079/11681/50309",
+        "10.63646/kpqm1958"
+      ],
+      "affected_rows": 2,
+      "evaluation_overlap": [
+        "10.21079/11681/50309",
+        "10.63646/kpqm1958"
+      ],
+      "expected_quality_signal": "embedding drifts away from the paper topic while the record still looks complete"
+    },
+    {
+      "scenario": "duplicate_records",
+      "description": "Append copies of existing rows keeping the same paper_id to simulate a re-run that double-loaded.",
+      "parameters": {
+        "count": 2
+      },
+      "affected_paper_ids": [
+        "10.1111/exsy.70341",
+        "10.21203/rs.3.rs-10012178/v1"
+      ],
+      "affected_rows": 2,
+      "evaluation_overlap": [
+        "10.1111/exsy.70341"
+      ],
+      "expected_quality_signal": "paper_id uniqueness check fails and duplicated documents crowd the top-k results"
+    }
+  ]
+}
