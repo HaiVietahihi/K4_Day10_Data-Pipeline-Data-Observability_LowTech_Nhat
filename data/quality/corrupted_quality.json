@@ -1,0 +1,38 @@
+{
+  "report_name": "corrupted",
+  "generated_at": "2026-08-06T09:40:37.536806+00:00",
+  "total_rows": 24,
+  "checks": [
+    {
+      "name": "row_count",
+      "passed": true,
+      "details": "24 rows"
+    },
+    {
+      "name": "paper_id_not_null",
+      "passed": true,
+      "details": "0 rows with missing paper_id"
+    },
+    {
+      "name": "paper_id_unique",
+      "passed": false,
+      "details": "2 duplicate paper_id values"
+    },
+    {
+      "name": "title_not_null",
+      "passed": true,
+      "details": "0 rows with missing title"
+    },
+    {
+      "name": "summary_length",
+      "passed": false,
+      "details": "2 rows with summary shorter than 100 chars"
+    },
+    {
+      "name": "freshness",
+      "passed": false,
+      "details": "3 rows older than 180 days"
+    }
+  ],
+  "passed": false
+}
