@@ -16,12 +16,12 @@
 
 ### Phần việc sở hữu
 
-| Module/deliverable | File/hàm phụ trách | Input nhận vào | Output bàn giao | Trạng thái |
-| ------------------ | --------------------- | ---------------- | ----------------- | -------------------------------------------- |
-| **Khởi tạo môi trường & Dependencies** | `.venv`, `pyproject.toml` | Python system 3.14.6 | Môi trường ảo Python 3.12.10 với full dependencies | Hoàn thành |
-| **Tạo bộ câu hỏi đánh giá cố định (Frozen Test Set)** | `src/evaluation/testset.py` | `data/clean/papers_clean.json` | `data/eval/test_set.json` (10 câu hỏi factual chuẩn) | Hoàn thành |
-| **Xây dựng & Thử nghiệm Vector Database** | `src/retrieval/index.py`, `src/retrieval/embeddings.py` | `papers_clean.json`, `all-MiniLM-L6-v2` | `data/chroma/`, `data/embeddings/papers_embeddings.json` | Hoàn thành |
-| **Quản lý Git Branch** | Nhánh `NguyenVietHai` | Nhánh gốc `NguyenHoangMinh` | Push thành công branch `NguyenVietHai` lên Remote | Hoàn thành |
+| Module/deliverable                                    | File/hàm phụ trách                                      | Input nhận vào                          | Output bàn giao                                          | Trạng thái |
+| -------------------------------------------------------| ---------------------------------------------------------| -----------------------------------------| ----------------------------------------------------------| ------------|
+| **Khởi tạo môi trường & Dependencies**                | `.venv`, `pyproject.toml`                               | Python system 3.14.6                    | Môi trường ảo Python 3.12.10 với full dependencies       | Hoàn thành |
+| **Tạo bộ câu hỏi đánh giá cố định (Frozen Test Set)** | `src/evaluation/testset.py`                             | `data/clean/papers_clean.json`          | `data/eval/test_set.json` (10 câu hỏi factual chuẩn)     | Hoàn thành |
+| **Xây dựng & Thử nghiệm Vector Database**             | `src/retrieval/index.py`, `src/retrieval/embeddings.py` | `papers_clean.json`, `all-MiniLM-L6-v2` | `data/chroma/`, `data/embeddings/papers_embeddings.json` | Hoàn thành |
+| **Quản lý Git Branch**                                | Nhánh `NguyenVietHai`                                   | Nhánh gốc `NguyenHoangMinh`             | Push thành công branch `NguyenVietHai` lên Remote        | Hoàn thành |
 
 ### Việc hỗ trợ ngoài phạm vi chính
 
@@ -45,9 +45,9 @@ Artifact `data/eval/test_set.json` chứa 10 câu hỏi factual chuẩn được
 
 ### Vấn đề cần giải quyết
 
+
 1. Xây dựng và đóng băng bộ câu hỏi đánh giá (Frozen Evaluation Set) để đảm bảo tính nhất quán (reproducibility) và so sánh công bằng giữa các pha (Baseline vs Corrupted vs Repaired).
 2. Kiểm thử luồng tạo vector database (ChromaDB + SentenceTransformers `all-MiniLM-L6-v2`).
-
 
 ### Cách triển khai
 
