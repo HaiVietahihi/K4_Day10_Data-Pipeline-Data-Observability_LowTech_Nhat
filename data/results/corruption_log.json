@@ -1,0 +1,8 @@
+[
+  "Dropped 2 latest records.",
+  "Blanked summaries at indices [5, 6].",
+  "Injected noise into summaries at indices [20, 17, 6].",
+  "Truncated titles at indices [4, 21].",
+  "Made dates stale at indices [16, 12, 17].",
+  "Added 1 duplicate row."
+]

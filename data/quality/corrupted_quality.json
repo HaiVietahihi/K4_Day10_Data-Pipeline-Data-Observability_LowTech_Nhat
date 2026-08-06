@@ -1,0 +1,10 @@
+{
+  "report_name": "corrupted_quality",
+  "total_rows": 23,
+  "null_ids": 0,
+  "duplicate_ids": 1,
+  "null_titles": 0,
+  "short_summaries": 2,
+  "stale_rows": 3,
+  "success": false
+}
