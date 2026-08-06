@@ -45,9 +45,9 @@ Artifact `data/eval/test_set.json` chứa 10 câu hỏi factual chuẩn được
 
 ### Vấn đề cần giải quyết
 
-1. Khởi tạo môi trường ảo Python 3.12 tương thích với cấu hình `pyproject.toml` (`>=3.11,<3.14`).
-2. Xây dựng và đóng băng bộ câu hỏi đánh giá (Frozen Evaluation Set) để đảm bảo tính nhất quán (reproducibility) và so sánh công bằng giữa các pha (Baseline vs Corrupted vs Repaired).
-3. Kiểm thử luồng tạo vector database (ChromaDB + SentenceTransformers `all-MiniLM-L6-v2`).
+1. Xây dựng và đóng băng bộ câu hỏi đánh giá (Frozen Evaluation Set) để đảm bảo tính nhất quán (reproducibility) và so sánh công bằng giữa các pha (Baseline vs Corrupted vs Repaired).
+2. Kiểm thử luồng tạo vector database (ChromaDB + SentenceTransformers `all-MiniLM-L6-v2`).
+
 
 ### Cách triển khai
 
